@@ -6,5 +6,5 @@ Once we have the result from the reviewer, the code will be released.
 
 ## Todo
 - [x] submit paper
-- [ ] wait for reviewers
+- [x] wait for reviewers
 - [ ] release the code
