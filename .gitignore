@@ -1,0 +1,23 @@
+# system
+*__
+
+# user
+build
+/data
+dtwsom
+images
+notebooks
+output/*
+references
+reports
+src.*
+secret.env
+bin
+src/models/predictions
+src/models/unilm
+weighted-levenshtein
+oldmarkdown.txt
+results.txt
+Makefile
+dtwsom
+docs

@@ -1,0 +1,50 @@
+# eventually update with https://clg.readthedocs.io/en/latest/examples.html
+
+GENERAL:
+  task: substitution
+  method: split
+  divider: strictly_words
+  debug: False
+  max_data: 2000
+  max_vocab: 2000
+
+STATISTICS:
+  can_override: True 
+  sub_tables: False 
+
+PREPROCESS:
+  build: False 
+  convert: False
+  train_som: False 
+  train_gmm: False 
+  train_repr: True 
+
+TRAINING:
+  repr_name: embed-repr-30-3-2000
+  model_name: sgns
+  e_dim: 30
+  n_negs: 10
+  numeral_pow: 0.75
+  epoch: 1
+  mb: 2048
+  # 1e-X problem notation https://stackoverflow.com/a/30462009
+  ss_t: 0.00001 #1e-5
+  ss_r: 0.00001 #1e-5
+  scheme: prototype
+  lr: 0.001 #1e-3
+  gmms_name: gmm.dat
+  alpha: 1.0
+  clip: 0.02
+  #! only store_true
+  conti: False
+  weights: False
+  no_subsample: False
+  cuda: True
+  log_space: False
+
+VISUALIZATION:
+  top_k: 2000
+  run_name: '2022-03-08 15:43:29'
+  epoch_no: 10
+  centroids_no: 47
+  alpha_no: 1.0

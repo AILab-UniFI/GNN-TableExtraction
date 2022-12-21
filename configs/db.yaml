@@ -1,0 +1,9 @@
+####################
+## DATABASE LINKS ##
+####################
+
+DATABASES:
+    pubtables1m: 'https://msropendataset01.blob.core.windows.net/pubtables1m'
+    publaynet: 
+        pdfs: 'https://dax-cdn.cdn.appdomain.cloud/dax-publaynet/1.0.0/PubLayNet_PDF.tar.gz'
+        annotations: 'https://dax-cdn.cdn.appdomain.cloud/dax-publaynet/1.0.0/labels.tar.gz?_ga=2.252263497.1911140011.1644402271-566577787.1643567867'

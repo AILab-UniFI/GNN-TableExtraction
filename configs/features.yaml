@@ -1,0 +1,81 @@
+GRAPH:
+    # which collection to use for building 
+    split: null
+        # - train
+        # - test
+    # edges choice: ['knn', 'visibility']
+    # edges: knn
+    # number of papers [number or null]
+    num_papers: null
+    
+FEATURES:
+    # which features to use: ["bbox", "repr", "spacy", "scibert"]
+    choices: null
+        # - BBOX
+        # - REPR
+        # - SPACY
+        # - SCIBERT
+
+BBOX:
+    specifics:
+        is_cuda: False
+        return_tensor: False
+    
+
+    input: null
+
+REPR:
+    # features representation vary on
+    specifics:
+        # others params
+        use_words: False
+        top_k: 2000
+        is_cuda: False
+        return_tensor: False
+    
+
+    input: 
+        # file params
+        run_name: '2022-03-08 15:43:29'
+        epoch_no: 10
+        centroids_no: 47
+        component_no: 3
+        alpha_no: 1.0
+        
+
+SPACY:
+    specifics:
+        model_path: 'en_core_web_lg'
+        is_cuda: False
+        return_tensor: False
+    
+
+    # one could apply this method both on 
+    # singular text word or sentence
+    input:
+        # type can be ['singular', 'lines', 'blocks']
+        type: 'singular'
+        # if singular, then reference=null
+        # if lines or block, then 
+        # reference=path/to/lines-or-blocks-file or lines-or-blocks-file
+        reference: null
+    
+
+SCIBERT:
+    specifics:
+        per_chunk: 6000
+        model_path: 'allenai/scibert_scivocab_uncased'
+        pooling: 'mean' # 'max'
+        is_cuda: False
+        return_tensor: True
+    
+
+    # one could apply this method both on 
+    # singular text word or sentence
+    input:
+        # type can be ['singular', 'lines', 'blocks']
+        type: 'singular'
+        # if singular, then reference=null
+        # if lines or block, then 
+        # reference=path/to/lines-or-blocks-file or lines-or-blocks-file
+        reference: null

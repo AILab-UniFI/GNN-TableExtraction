@@ -1,0 +1,130 @@
+GENERAL:
+  arg_name: 16-04-2022
+  converted: True
+
+##################
+## GRAPHBUILDER ##
+##################
+
+PREPROCESS:
+    # max pixels and edge can be
+    max_dist: 500
+    # number of neighbors if knn is used
+    k: 5
+    # define how far a node can be from other classes. 
+    # The lower the number, the more the nodes will be removed.
+    range_island: 4
+    # random seed for reproducibility
+    seed: 42
+    # define whether to pad with 0 or not scale input dimension
+    padding: False
+    # choose a graph (edges) between -> 'knn' / 'visibility'
+    mode: visibility
+    # choose features to load in graph nodes -> 'bbox' / 'repr' / 'spacy' / 'scibert'
+    features:
+        - BBOX
+        # - REPR
+        # - SPACY
+        # - SCIBERT
+    # choose edge features to load in graph edges -> 'distances'
+    edge_features: False
+    # make edges bidirectional
+    bidirectional: True
+
+
+################
+## DATALOADER ##
+################
+
+DLTRAIN:
+    # use only the pages with a table within
+    only_tables: True
+    # remove from graphs those nodes too far from other different classes
+    remove_islands: False
+    # train split, range 0 -> 1
+    rate: 0.95
+
+DLTEST:
+    # use only the pages with a table within
+    only_tables: False
+    # remove from graphs those nodes too far from other different classes
+    remove_islands: False
+
+####################
+## TRAINING MODEL ##
+####################
+
+TRAINING:
+    # number of training graphs
+    num_graphs: null
+    # adding nodes self loops
+    self_loop: False
+    # gpu to use
+    gpu: 0
+    # how many features to drop 0 -> 100 %
+    dropout: 0
+    # number of epochs
+    n_epochs: 2000
+    # optimizer settings
+    lr: 0.01
+    weight_decay: 0.0005 # 5e-4
+    # k-Fold cross validation
+    n_splits: 10
+    # add class weights for data imbalance
+    class_weights: False
+    # choose from ['all_scibert', 'all_spacy', 'only_scibert', 'only_spacy', 'only_repr', 'only_bbox']
+    # mode: all_scibert
+    # number of pages at runtime
+    batch_size: 100
+    # early stopper max epoch before quit training
+    es_patience: 50
+    #! informations about the model mode
+    # mode for calculating hidden_layed_dimensions ['fixed', 'scaled', 'half', 'padding']
+    mode_params: scaled
+    # number of layers in the network
+    n_layers: 3
+
+
+
+####################
+##  LABELS PARAMS ##
+####################
+LABELS:
+    to_remove:
+        # - OTHER       # = 0
+        # - TEXT        # = 1
+        # - TITLE       # = 2
+        # - LIST        # = 3
+        - 4 # TABLE       # = 4 #! NO NODES
+        # - FIGURE      # = 5
+        # - CAPTION     # = 6
+        # - TABLE_COLH  # = 7
+        # - TABLE_SP    # = 8
+        - 9 #TABLE_GCELL # = 9 #! NO NODES
+        # - TABLE_TCELL # = 10
+        - 11 #TABLE_COL   # = 11 #! NO NODES
+        - 12 #TABLE_ROW   # = 12 #! NO NODES
+
+####################
+##  MODES PARAMS  ##
+####################
+
+MODES:
+    # if it's fixed, no additional parameters are required
+    fixed:
+        h_layer_dim: 1000
+
+    scaled:
+        # number of parameters of the network
+        # if None -> h_layer_dim = in_feats
+        # if value -> n_layer is adapted as consequences
+        params_no: 100000
+
+    # if it's half, no additional parameters are required as
+    # h_layer_dim is just in_feats/2
+    half: null
+
+    # if it's padding, no additional parameters are required
+    # h_layer_dim is just in_feats/2
+    padding: null
+
